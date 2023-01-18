@@ -1,23 +1,36 @@
 from django.db import models
 
+from .validators import ValidateGroupStartDate
+
 # Create your models here.
 
 
-class Group(models.Model):
+class GroupModel(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name="Group Name",
         db_column="name",
     )
 
-    # without additional information about the realisation and usage it's impossible
-    # to create necessary fields, because they vary depend on the usage
     
-    start_date = models.DateField(
-        verbose_name="Start Date",
-    )
+    start_date = models.DateField(verbose_name="Start Date", validators=[ValidateGroupStartDate()])
 
-    description = models.TextField()
+    description = models.TextField(blank=True)
     
     class Meta:
         db_table = "groups"
+
+    @classmethod
+    def generate_fake_data(cls, number):
+        if not isinstance(number, int) or number < 1:
+            return
+
+        from faker import Faker
+    
+        f = Faker()
+        for _ in range(number):
+            group = cls()
+            group.name = " ".join(f.words(2)).capitalize()
+            group.start_date = f.date()
+            
+            group.save()
