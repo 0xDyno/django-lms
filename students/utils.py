@@ -48,3 +48,26 @@ def get_only_numbers(phone_number: str):
         if char.isnumeric():
             res += char
     return res
+
+
+def HW_task_1(phone_number: str):
+    from django.core.validators import ValidationError
+    allowed = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", " ", ")", "("]
+    
+    # clear
+    result = ""
+    first_3_numbers = ""
+    total_numbers = 0
+    for char in phone_number:
+        if char in allowed:
+            result += char
+        if char.isnumeric():
+            total_numbers += 1
+            if len(first_3_numbers) < 3:
+                first_3_numbers += char
+                
+            
+    if first_3_numbers == "380" and total_numbers == 12:
+        return result
+    else:
+        raise ValidationError(message="Wrong phone number")
