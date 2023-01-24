@@ -11,7 +11,6 @@ class GroupModel(models.Model):
         verbose_name="Group Name",
         db_column="name",
     )
-
     
     start_date = models.DateField(verbose_name="Start Date", validators=[ValidateGroupStartDate()])
 

@@ -26,6 +26,7 @@ class StudentModel(models.Model):
     )
     email = models.EmailField()
     # email = models.EmailField(validators=[validate_unique_email])
+    phone_number = models.CharField(blank=True, max_length=20)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
