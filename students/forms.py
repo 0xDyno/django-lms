@@ -16,7 +16,7 @@ class StudentForm(ModelForm):
         fields = ["name", "surname", "birthday", "city", "email", "phone_number"]
         
     def clean_phone_number(self):
-        phone = self.cleaned_data.get("phone_number")
+        phone = self.cleaned_data.get("phone_number").strip()
         
         only_numbers = utils.get_only_numbers(phone)
         
