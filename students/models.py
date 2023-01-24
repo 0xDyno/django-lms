@@ -1,10 +1,7 @@
-import datetime
-
 from django.db import models
 
 from .validators import validate_unique_email
 
-# Create your models here.
 
 DOMAINS = ["gmail.com", "yahoo.com", "icloud.com", "proton.me"]
 
@@ -27,7 +24,8 @@ class StudentModel(models.Model):
         null=True,
         blank=True,
     )
-    email = models.EmailField(validators=[validate_unique_email])
+    email = models.EmailField()
+    # email = models.EmailField(validators=[validate_unique_email])
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
