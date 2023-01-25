@@ -1,0 +1,46 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+
+    <h3>{{ group.name }}</h3>
+
+    <table>
+        <tr>
+            <th>
+                {% if started %} Started on: {% else %} Starts on: {% endif %}
+            </th>
+            <td>
+                {{ group.start_date }}
+            </td>
+        </tr>
+
+
+        {% if group.description %}
+            <tr>
+                <th>
+                    Description:
+                </th>
+                <td>
+                    {{ group.description }}
+                </td>
+            </tr>
+        {% endif %}
+
+    </table>
+
+    <br>
+
+    <a href="{% url "edit_group" group.pk %}" style="text-decoration: none;">
+        <input type="button" value="Edit">
+    </a>
+
+
+    <a href="{% url "delete_group" group.pk %}" style="text-decoration: none;">
+        <input type="button" value="Delete">
+    </a>
+
+    <a href="{% url "groups" %}" style="text-decoration: none;">
+        <input type="button" value="Back">
+    </a>
+
+{% endblock %}

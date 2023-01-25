@@ -1,0 +1,45 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+
+    <h3>{{ teacher.name }} {{ teacher.surname }}</h3>
+
+    <table>
+        <tr>
+            <th>
+                Salary:
+            </th>
+            <td>
+                {{ teacher.salary }}
+            </td>
+        </tr>
+
+
+        {% if teacher.birthday %}
+            <tr>
+                <th>
+                    Birthday:
+                </th>
+                <td>
+                    {{ teacher.birthday }}
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <br>
+
+    <a href="{% url "edit_teacher" teacher.pk %}" style="text-decoration: none;">
+        <input type="button" value="Edit">
+    </a>
+
+
+    <a href="{% url "delete_teacher" teacher.pk %}" style="text-decoration: none;">
+        <input type="button" value="Delete">
+    </a>
+
+    <a href="{% url "teachers" %}" style="text-decoration: none;">
+        <input type="button" value="Back">
+    </a>
+
+{% endblock %}

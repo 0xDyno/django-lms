@@ -19,7 +19,7 @@ class StudentModel(models.Model):
     updated = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return "{} {} ({})".format(self.name, self.surname, self.id)
+        return "Student {} {} ({})".format(self.name, self.surname, self.id)
     
     class Meta:
         db_table = "students"

@@ -34,7 +34,7 @@ def create_student_view(request):
             return HttpResponseRedirect("/students/" + str(student.pk))
     
     context = {"form": form}
-    return render(request, "students/create.html", context=context)
+    return render(request, "students/create_student.html", context=context)
 
 
 def edit_student_view(request, pk: int):
@@ -53,7 +53,7 @@ def edit_student_view(request, pk: int):
             return HttpResponseRedirect("/students/" + str(pk))
     
     context = {"form": form, "pk": pk}
-    return render(request, "students/edit.html", context=context)
+    return render(request, "students/edit_student.html", context=context)
 
 
 def delete_student_view(request, pk: int):
@@ -65,4 +65,4 @@ def delete_student_view(request, pk: int):
         student.delete()
         return HttpResponseRedirect("/students/")
     
-    return render(request, "students/delete.html", context={"pk": pk})
+    return render(request, "students/delete_student.html", context={"pk": pk})

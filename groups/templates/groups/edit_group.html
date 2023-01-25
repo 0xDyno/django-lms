@@ -1,0 +1,16 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="description">Description</label> <br> <br>
+        {{ form.description }}
+
+        <br><br>
+        <input type="submit" value="Save">
+
+        <a href="{% url "group" pk %}"><input type="button" value="Details"></a>
+    </form>
+
+{% endblock %}
