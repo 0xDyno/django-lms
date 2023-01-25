@@ -1,0 +1,69 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+
+    <h3>{{ st.name }} {{ st.surname }}</h3>
+
+    <table>
+        <tr>
+            <th>
+                Email:
+            </th>
+            <td>
+                {{ st.email }}
+            </td>
+        </tr>
+
+
+        {% if st.birthday %}
+            <tr>
+                <th>
+                    Birthday:
+                </th>
+                <td>
+                    {{ st.birthday }}
+                </td>
+            </tr>
+        {% endif %}
+
+
+        {% if st.city %}
+            <tr>
+                <th>
+                    City:
+                </th>
+                <td>
+                    {{ st.city }}
+                </td>
+            </tr>
+        {% endif %}
+
+
+        {% if st.phone_number %}
+            <tr>
+                <th>
+                    Phone:
+                </th>
+                <td>
+                    {{ st.phone_number }}
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <br>
+
+    <a href="{% url "edit" st.pk %}" style="text-decoration: none;">
+        <input type="button" value="Edit">
+    </a>
+
+
+    <a href="{% url "delete" st.pk %}" style="text-decoration: none;">
+        <input type="button" value="Delete">
+    </a>
+
+    <a href="{% url "students" %}" style="text-decoration: none;">
+        <input type="button" value="Back">
+    </a>
+
+{% endblock %}

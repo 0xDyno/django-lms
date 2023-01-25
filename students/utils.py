@@ -6,30 +6,6 @@ UA_SIM_PROVIDERS = {"039", "067", "068", "096", "097", "098", "050", "066", "095
 UA_PHONE_NUMBER_LENGTH = 12
 
 
-def get_table_with_students(all_students):
-    table = "<table><tr><th>Name</th><th>Email</th><th>Birthday</th></tr>"
-    for st in all_students:
-        table += f"""
-        <tr>
-            <td> <a href=\"{st.pk}\"> {st.name} {st.surname} </a></td>
-            <td>{st.email}</td>
-            <td>{st.birthday}</td>
-        </tr>
-        """
-    table += "</table>"
-    return table
-
-
-def not_found():
-    page = f"""
-    <center>
-        <h1> 404 Not Found </h1>
-        {student_navigation()}
-    </center>
-    """
-    return page
-
-
 def student_navigation():
     return "<br><br> " \
            "<a href=\"/students/\"> All students </a> | " \

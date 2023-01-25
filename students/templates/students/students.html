@@ -1,0 +1,48 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+    <a href="{% url "create" %}">Create new Student</a><br><br>
+
+    {% if not all_students %}
+
+        <p>No students</p>
+
+    {% else %}
+
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Birthday
+                </th>
+            </tr>
+
+            {% for st in all_students %}
+
+                <tr>
+
+                    <td>
+                        <a href="{% url "student" st.pk %}"> {{ st.name }} {{ st.surname }} </a>
+                    </td>
+
+                    <td style="padding: 5px;">
+                        {{ st.email }}
+                    </td>
+
+                    <td>
+                        {{ st.birthday }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
+    {% endif %}
+{% endblock %}

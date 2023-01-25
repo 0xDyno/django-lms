@@ -1,109 +1,68 @@
-from django.middleware.csrf import get_token
-from django.shortcuts import HttpResponse, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import render
 
-from . import utils
 from .forms import CreateStudentForm, UpdateStudentForm
 from .models import StudentModel
 
 
 def home_view(request):
-    page = """<center>
-                <h1> Home </h1>
-                <a href="/students/"> All students </a>
-           </center>"""
-    return HttpResponse(page)
+    return render(request, "base/home.html", context={"message": "Home page"})
 
 
 def all_students_view(request):
-    students = StudentModel.objects.all()
-    
-    page = f"""<center>
-           <h1>All students</h1>
-           <a href="/"> Home page </a> |
-           <a href="create"> Create </a> <br><br>
-           {utils.get_table_with_students(students)}
-           </center>"""
-    
-    return HttpResponse(page)
+    context = {"all_students": StudentModel.objects.all()}
+    return render(request, "students/students.html", context=context)
 
 
 def student_view(request, pk: int):
     if StudentModel.objects.last().pk < pk:
-        return HttpResponse(utils.not_found())
+        return render(request, "base/home.html", context={"message": "404. Not Found"})
     
-    st = StudentModel.objects.get(pk=pk)
-    
-    if request.method == "GET":
-        form = UpdateStudentForm(instance=st)
-        
-    if request.method == "POST":
-        form = UpdateStudentForm(instance=st, data=request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(redirect_to="/students/")
-
-    page = f"""
-            <center>
-                <h1> {st.name} {st.surname} </h1>
-                <form method="POST">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{get_token(request)}">
-                    <table>
-                        {form.as_table()}
-                    </table>
-                    <br>
-                    <input type="submit" value="Save">
-                    <a href="delete/{pk}"><input type="button" value="Delete"></a>
-                    <a href="/students/"><input type="button" value="Back"></a>
-                </form>
-            </center>
-            """
-    return HttpResponse(page)
+    context = {"st": StudentModel.objects.get(pk=pk)}
+    return render(request, "students/student.html", context=context)
 
 
 def create_student_view(request):
     if request.method == "GET":
         form = CreateStudentForm()
-        
+    
     if request.method == "POST":
         form = CreateStudentForm(request.POST)
         
         if form.is_valid():
+            student = form.save()
+            return HttpResponseRedirect("/students/" + str(student.pk))
+    
+    context = {"form": form}
+    return render(request, "students/create.html", context=context)
+
+
+def edit_student_view(request, pk: int):
+    if StudentModel.objects.last().pk < pk:
+        return render(request, "base/home.html", context={"message": "404. Not Found"})
+    
+    student = StudentModel.objects.get(pk=pk)
+    
+    if request.method == "GET":
+        form = UpdateStudentForm(instance=student)
+    elif request.method == "POST":
+        form = UpdateStudentForm(instance=student, data=request.POST)
+        if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/students/")
+            
+            return HttpResponseRedirect("/students/" + str(pk))
     
-    page = f"""
-    <center>
-        <form method="POST">
-            <table>
-                {form.as_table()}
-            </table>
-            <input type="hidden" name="csrfmiddlewaretoken" value="{get_token(request)}">
-            <input type="submit" value="Save"> <br> <br>
-            <a href="/students/"><input type="button" value="All Students"></a>
-        </form>
-    </center>
-    """
-    
-    return HttpResponse(page)
+    context = {"form": form, "pk": pk}
+    return render(request, "students/edit.html", context=context)
 
 
 def delete_student_view(request, pk: int):
     if StudentModel.objects.last().pk < pk:
-        return HttpResponse(utils.not_found())
+        return render(request, "base/home.html", context={"message": "404. Not Found"})
     
-    if request.method == "GET":
-        page = f"""<center>Do you want to delete? <br> <br>
-                    <form method="POST">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="{get_token(request)}">
-                        <input type="submit" value="Delete">
-                        <a href="/students/{pk}">
-                            <input type="submit" value="Back">
-                        </a>
-                    </form>
-                </center>
-                """
-        return HttpResponse(page)
-    elif request.method == "POST":
-        st = StudentModel.objects.get(pk=pk)
-        st.delete()
-        return HttpResponseRedirect(redirect_to="/students/")
+    if request.method == "POST":
+        student = StudentModel.objects.get(pk=pk)
+        student.delete()
+        return HttpResponseRedirect("/students/")
+    
+    return render(request, "students/delete.html", context={"pk": pk})
