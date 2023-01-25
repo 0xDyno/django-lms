@@ -7,7 +7,7 @@ UA_PHONE_NUMBER_LENGTH = 12
 
 
 def get_table_with_students(all_students):
-    table = "<table><tr><th>Name</th><th>Birthday</th><th>Email</th></tr>"
+    table = "<table><tr><th>Name</th><th>Email</th><th>Birthday</th></tr>"
     for st in all_students:
         table += f"""
         <tr>
