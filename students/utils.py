@@ -6,12 +6,6 @@ UA_SIM_PROVIDERS = {"039", "067", "068", "096", "097", "098", "050", "066", "095
 UA_PHONE_NUMBER_LENGTH = 12
 
 
-def student_navigation():
-    return "<br><br> " \
-           "<a href=\"/students/\"> All students </a> | " \
-           "<a href=\"/students/create/\"> Create </a>"
-
-
 def format_phone_number(phone_number: str):
     if not phone_number.isnumeric():
         phone_number = get_only_numbers(phone_number)
