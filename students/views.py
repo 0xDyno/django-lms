@@ -2,7 +2,7 @@ from django.middleware.csrf import get_token
 from django.shortcuts import HttpResponse, HttpResponseRedirect
 
 from . import utils
-from .forms import StudentForm
+from .forms import CreateStudentForm, UpdateStudentForm
 from .models import StudentModel
 
 
@@ -34,10 +34,10 @@ def student_view(request, pk: int):
     st = StudentModel.objects.get(pk=pk)
     
     if request.method == "GET":
-        form = StudentForm(instance=st)
+        form = UpdateStudentForm(instance=st)
         
     if request.method == "POST":
-        form = StudentForm(instance=st, data=request.POST)
+        form = UpdateStudentForm(instance=st, data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(redirect_to="/students/")
@@ -62,10 +62,10 @@ def student_view(request, pk: int):
 
 def create_student_view(request):
     if request.method == "GET":
-        form = StudentForm()
+        form = CreateStudentForm()
         
     if request.method == "POST":
-        form = StudentForm(request.POST)
+        form = CreateStudentForm(request.POST)
         
         if form.is_valid():
             form.save()

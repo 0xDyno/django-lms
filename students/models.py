@@ -8,22 +8,10 @@ DOMAINS = ["gmail.com", "yahoo.com", "icloud.com", "proton.me"]
 
 class StudentModel(models.Model):
     # For CharField blank & null are False by default
-    name = models.CharField(
-        max_length=50,
-        verbose_name="First Name",
-        db_column="name",
-    )
-    surname = models.CharField(
-        max_length=50,
-        verbose_name="Surname",
-        db_column="surname",
-    )
+    name = models.CharField(max_length=50, verbose_name="First Name", db_column="name")
+    surname = models.CharField(max_length=50, verbose_name="Surname", db_column="surname")
     birthday = models.DateField()
-    city = models.CharField(
-        max_length=30,
-        null=True,
-        blank=True,
-    )
+    city = models.CharField(max_length=30, null=True, blank=True)
     email = models.EmailField()
     # email = models.EmailField(validators=[validate_unique_email])
     phone_number = models.CharField(blank=True, max_length=20)
