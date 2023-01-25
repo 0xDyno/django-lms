@@ -20,6 +20,8 @@
                 <th>
                     Birthday
                 </th>
+                <th>
+                </th>
             </tr>
 
             {% for st in all_students %}
@@ -36,6 +38,10 @@
 
                     <td>
                         {{ st.birthday }}
+                    </td>
+
+                    <td>
+                        <a href="{% url "edit" st.pk %}"> Edit </a>
                     </td>
 
                 </tr>
