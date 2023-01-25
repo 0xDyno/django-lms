@@ -16,8 +16,12 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib import admin
 
+from students.views import home_view
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("students.urls")),
     # path("", include("groups.urls")),
+    
+    path("", home_view, name="home"),
 ]
