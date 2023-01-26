@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
 from .forms import CreateTeacherForm, UpdateTeacherForm
@@ -11,10 +12,9 @@ def all_teachers_view(request):
 
 
 def teacher_view(request, pk: int):
-    if TeacherModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
+    teacher = get_object_or_404(TeacherModel, pk=pk)
     
-    context = {"teacher": TeacherModel.objects.get(pk=pk)}
+    context = {"teacher": teacher}
     return render(request, "teachers/teacher.html", context=context)
 
 
@@ -34,10 +34,7 @@ def create_teacher_view(request):
 
 
 def edit_teacher_view(request, pk: int):
-    if TeacherModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
-    teacher = TeacherModel.objects.get(pk=pk)
+    teacher = get_object_or_404(TeacherModel, pk=pk)
     
     if request.method == "GET":
         form = UpdateTeacherForm(instance=teacher)
@@ -53,11 +50,8 @@ def edit_teacher_view(request, pk: int):
 
 
 def delete_teacher_view(request, pk: int):
-    if TeacherModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
     if request.method == "POST":
-        teacher = TeacherModel.objects.get(pk=pk)
+        teacher = get_object_or_404(TeacherModel, pk=pk)
         teacher.delete()
         return HttpResponseRedirect("/teachers/")
     

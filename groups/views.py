@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
 from .forms import CreateGroupForm, UpdateGroupForm
@@ -13,10 +14,8 @@ def all_groups_view(request):
 
 
 def group_view(request, pk: int):
-    if GroupModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
+    group = get_object_or_404(GroupModel, pk=pk)
     
-    group = GroupModel.objects.get(pk=pk)
     is_started = utils.is_started(group.start_date)
     
     context = {"group": group, "started": is_started}
@@ -39,10 +38,7 @@ def create_group_view(request):
 
 
 def edit_group_view(request, pk: int):
-    if GroupModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
-    group = GroupModel.objects.get(pk=pk)
+    group = get_object_or_404(GroupModel, pk=pk)
     
     if request.method == "GET":
         form = UpdateGroupForm(instance=group)
@@ -58,11 +54,8 @@ def edit_group_view(request, pk: int):
 
 
 def delete_group_view(request, pk: int):
-    if GroupModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
     if request.method == "POST":
-        group = GroupModel.objects.get(pk=pk)
+        group = get_object_or_404(GroupModel, pk=pk)
         group.delete()
         return HttpResponseRedirect("/groups/")
     

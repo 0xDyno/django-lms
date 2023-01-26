@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
 from .forms import CreateStudentForm, UpdateStudentForm
@@ -15,10 +16,9 @@ def all_students_view(request):
 
 
 def student_view(request, pk: int):
-    if StudentModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
+    student = get_object_or_404(StudentModel, pk=pk)
     
-    context = {"st": StudentModel.objects.get(pk=pk)}
+    context = {"student": student}
     return render(request, "students/student.html", context=context)
 
 
@@ -38,10 +38,7 @@ def create_student_view(request):
 
 
 def edit_student_view(request, pk: int):
-    if StudentModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
-    student = StudentModel.objects.get(pk=pk)
+    student = get_object_or_404(StudentModel, pk=pk)
     
     if request.method == "GET":
         form = UpdateStudentForm(instance=student)
@@ -57,11 +54,8 @@ def edit_student_view(request, pk: int):
 
 
 def delete_student_view(request, pk: int):
-    if StudentModel.objects.last().pk < pk:
-        return render(request, "base/home.html", context={"message": "404. Not Found"})
-    
     if request.method == "POST":
-        student = StudentModel.objects.get(pk=pk)
+        student = get_object_or_404(StudentModel, pk=pk)
         student.delete()
         return HttpResponseRedirect("/students/")
     
