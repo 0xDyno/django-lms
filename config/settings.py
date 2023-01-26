@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     "students.apps.StudentsConfig",
     "groups.apps.GroupsConfig",
+    "teachers.apps.TeachersConfig",
 ]
 
 MIDDLEWARE = [
@@ -61,8 +62,6 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "templates",
-            "groups/templates",
-            "students/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

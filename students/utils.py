@@ -19,6 +19,9 @@ def format_phone_number(phone_number: str):
 
 
 def normalize_phone_number(phone_number: str):
+    if not phone_number:
+        return ""
+    
     only_numbers = get_only_numbers(phone_number)
     
     # this will work only for UA phone numbers

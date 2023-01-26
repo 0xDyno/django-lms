@@ -1,0 +1,16 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <input type="submit" value="Save">
+
+        <a href="{% url "teachers" %}"><input type="button" value="Back"></a>
+    </form>
+
+{% endblock %}

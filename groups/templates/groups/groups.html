@@ -1,0 +1,54 @@
+{% extends "patterns/base.html" %}
+
+{% block content %}
+    <a href="{% url "create_group" %}">Create new Group</a><br><br>
+
+    {% if not all_groups %}
+
+        <p>No groups</p>
+
+    {% else %}
+
+        <table style="width: 50%;">
+            <tr>
+                <th width="120px">
+                    Start Date
+                </th>
+                <th width="150px">
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            {% for group in all_groups %}
+
+                <tr>
+
+                    <td style="padding: 5px;">
+                        {{ group.start_date }}
+                    </td>
+
+                    <td style="padding: 5px;">
+                        <a href="{% url "group" group.pk %}"> {{ group.name }} </a>
+                    </td>
+
+                    <td style="padding: 5px;">
+                        {{ group.description }}
+                    </td>
+
+                    <td style="padding: 5px;">
+                        <a href="{% url "edit_group" group.pk %}"> Edit </a>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
+    {% endif %}
+{% endblock %}

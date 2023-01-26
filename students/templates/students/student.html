@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h3>{{ st.name }} {{ st.surname }}</h3>
+    <h3>{{ student.name }} {{ student.surname }}</h3>
 
     <table>
         <tr>
@@ -10,42 +10,42 @@
                 Email:
             </th>
             <td>
-                {{ st.email }}
+                {{ student.email }}
             </td>
         </tr>
 
 
-        {% if st.birthday %}
+        {% if student.birthday %}
             <tr>
                 <th>
                     Birthday:
                 </th>
                 <td>
-                    {{ st.birthday }}
+                    {{ student.birthday }}
                 </td>
             </tr>
         {% endif %}
 
 
-        {% if st.city %}
+        {% if student.city %}
             <tr>
                 <th>
                     City:
                 </th>
                 <td>
-                    {{ st.city }}
+                    {{ student.city }}
                 </td>
             </tr>
         {% endif %}
 
 
-        {% if st.phone_number %}
+        {% if student.phone_number %}
             <tr>
                 <th>
                     Phone:
                 </th>
                 <td>
-                    {{ st.phone_number }}
+                    {{ student.phone_number }}
                 </td>
             </tr>
         {% endif %}
@@ -53,12 +53,12 @@
 
     <br>
 
-    <a href="{% url "edit" st.pk %}" style="text-decoration: none;">
+    <a href="{% url "edit_student" student.pk %}" style="text-decoration: none;">
         <input type="button" value="Edit">
     </a>
 
 
-    <a href="{% url "delete" st.pk %}" style="text-decoration: none;">
+    <a href="{% url "delete_student" student.pk %}" style="text-decoration: none;">
         <input type="button" value="Delete">
     </a>
 

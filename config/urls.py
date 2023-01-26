@@ -20,8 +20,9 @@ from students.views import home_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("students.urls")),
-    # path("", include("groups.urls")),
+    path("students/", include("students.urls")),
+    path("groups/", include("groups.urls")),
+    path("teachers/", include("teachers.urls")),
     
     path("", home_view, name="home"),
 ]

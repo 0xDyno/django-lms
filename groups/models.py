@@ -6,11 +6,7 @@ from .validators import ValidateGroupStartDate
 
 
 class GroupModel(models.Model):
-    name = models.CharField(
-        max_length=50,
-        verbose_name="Group Name",
-        db_column="name",
-    )
+    name = models.CharField(max_length=50, verbose_name="Group Name", db_column="name")
     
     start_date = models.DateField(verbose_name="Start Date", validators=[ValidateGroupStartDate()])
 
