@@ -1,7 +1,8 @@
-{% extends "patterns/base.html" %}
+{% extends "base.html" %}
+
+{% block title %} - Edit Group {{ group.name }} {% endblock %}
 
 {% block content %}
-
     <form method="post">
         {% csrf_token %}
         <label for="description">Description</label> <br> <br>
@@ -10,7 +11,7 @@
         <br><br>
         <input type="submit" value="Save">
 
-        <a href="{% url "group" pk %}"><input type="button" value="Details"></a>
+        <a href="{% url "group:info" group.pk %}"><input type="button" value="Group Details"></a>
     </form>
 
 {% endblock %}

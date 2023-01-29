@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} - Delete Teacher {{ teacher.name }} {{ teacher.surname }} {% endblock %}
+
+{% block content %}
+
+    <p> Are you sure you want to delete "<strong>{{ teacher.name }} {{ teacher.surname }}</strong>"? </p>
+
+
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+
+        <a href="{% url "teacher:info" teacher.pk %}">
+            <input type="button" value="Teacher Details">
+        </a>
+    </form>
+
+{% endblock %}

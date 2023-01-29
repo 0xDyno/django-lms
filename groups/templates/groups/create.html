@@ -1,4 +1,6 @@
-{% extends "patterns/base.html" %}
+{% extends "base.html" %}
+
+{% block title %} - Create New Group {% endblock %}
 
 {% block content %}
 
@@ -8,11 +10,9 @@
             {{ form.as_table }}
         </table>
 
-        <br>
-
         <input type="submit" value="Save">
 
-        <a href="{% url "teacher" pk %}"><input type="button" value="Details"></a>
+        <a href="{% url "group:all" %}"><input type="button" value="Back"></a>
     </form>
 
 {% endblock %}

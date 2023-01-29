@@ -1,10 +1,11 @@
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.shortcuts import reverse
 
+from . import utils
 from .forms import CreateGroupForm, UpdateGroupForm
 from .models import GroupModel
-from . import utils
 
 
 def all_groups_view(request):
@@ -34,7 +35,7 @@ def create_group_view(request):
             return HttpResponseRedirect("/groups/" + str(group.pk))
     
     context = {"form": form}
-    return render(request, "groups/create_group.html", context=context)
+    return render(request, "groups/create.html", context=context)
 
 
 def edit_group_view(request, pk: int):
@@ -47,16 +48,17 @@ def edit_group_view(request, pk: int):
         if form.is_valid():
             form.save()
             
-            return HttpResponseRedirect("/groups/" + str(pk))
+            return HttpResponseRedirect(reverse("group:info", kwargs={"pk": pk}))
     
-    context = {"form": form, "pk": pk}
-    return render(request, "groups/edit_group.html", context=context)
+    context = {"form": form, "group": group}
+    return render(request, "groups/edit.html", context=context)
 
 
 def delete_group_view(request, pk: int):
-    if request.method == "POST":
-        group = get_object_or_404(GroupModel, pk=pk)
-        group.delete()
-        return HttpResponseRedirect("/groups/")
+    group = get_object_or_404(GroupModel, pk=pk)
     
-    return render(request, "groups/delete_group.html", context={"pk": pk})
+    if request.method == "POST":
+        group.delete()
+        return HttpResponseRedirect(reverse("group:all"))
+    
+    return render(request, "groups/delete.html", context={"group": group})

@@ -1,4 +1,4 @@
-{% extends "patterns/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
 
         <input type="submit" value="Save">
 
-        <a href="{% url "groups" %}"><input type="button" value="Back"></a>
+        <a href="{% url "teacher:all" %}"><input type="button" value="Back"></a>
     </form>
 
 {% endblock %}

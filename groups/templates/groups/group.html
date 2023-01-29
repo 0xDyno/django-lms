@@ -1,4 +1,6 @@
-{% extends "patterns/base.html" %}
+{% extends "base.html" %}
+
+{% block title %} - Group Info {{ group.name }} {% endblock %}
 
 {% block content %}
 
@@ -30,17 +32,18 @@
 
     <br>
 
-    <a href="{% url "edit_group" group.pk %}" style="text-decoration: none;">
+    <a href="{% url "group:edit" group.pk %}" style="text-decoration: none;">
         <input type="button" value="Edit">
     </a>
 
 
-    <a href="{% url "delete_group" group.pk %}" style="text-decoration: none;">
+    <a href="{% url "group:delete" group.pk %}" style="text-decoration: none;">
         <input type="button" value="Delete">
     </a>
 
-    <a href="{% url "groups" %}" style="text-decoration: none;">
-        <input type="button" value="Back">
+    <br><br>
+    <a href="{% url "group:all" %}" style="text-decoration: none;">
+        <input type="button" value="All groups">
     </a>
 
 {% endblock %}

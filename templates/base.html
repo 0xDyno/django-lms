@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS {% block title %}{% endblock %}</title>
+    <style>
+        table {
+            margin: auto;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        {% block custom_style %}{% endblock %}
+    </style>
+</head>
+<body style="text-align: center; background-color: antiquewhite;">
+
+{# Navigation #}
+<div style="padding-bottom: 20px">
+    <h1>Django LMS</h1>
+    <br>
+    <table style="padding: 10px; font-size: 1.2em; width: 50%;">
+        <tr>
+            <th width="120px">
+                <a href="{% url "home" %}">Main page</a>
+            </th>
+            <th width="120px">
+                <a href="{% url "student:all" %}"> All students </a>
+            </th>
+            <th width="120px">
+                <a href="{% url "group:all" %}"> All groups </a>
+            </th>
+            <th width="120px">
+                <a href="{% url "teacher:all" %}"> All teachers </a>
+            </th>
+        </tr>
+    </table>
+    <hr>
+</div>
+
+{# Content #}
+<div>
+    {% block content %}{% endblock %}
+</div>
+
+{# Footer #}
+<div style="padding-top: 20px">
+    <div>
+        <hr>
+        <p>Thanks for visiting Django LMS</p>
+    </div>
+</div>
+</body>
+</html>
