@@ -53,7 +53,6 @@ def edit_student_view(request, pk: int):
 def delete_student_view(request, pk: int):
     student = get_object_or_404(StudentModel, pk=pk)
     
-    
     if request.method == "POST":
         student.delete()
         return HttpResponseRedirect(reverse("student:all"))

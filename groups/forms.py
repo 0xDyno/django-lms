@@ -13,7 +13,6 @@ class CreateGroupForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"style": "text-align: center;",
                                                  "placeholder": "Write group's description"})
         }
-        
 
 
 class UpdateGroupForm(forms.ModelForm):
@@ -26,4 +25,3 @@ class UpdateGroupForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"style": "text-align: center;",
                                                  "placeholder": "Write group's description"})
         }
-    
