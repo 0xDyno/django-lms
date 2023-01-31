@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.shortcuts import reverse
 
 from .forms import CreateTeacherForm, UpdateTeacherForm
 from .models import TeacherModel
@@ -30,7 +31,7 @@ def create_teacher_view(request):
             return HttpResponseRedirect("/teachers/" + str(teacher.pk))
     
     context = {"form": form}
-    return render(request, "teachers/create_teacher.html", context=context)
+    return render(request, "teachers/create.html", context=context)
 
 
 def edit_teacher_view(request, pk: int):
@@ -43,16 +44,17 @@ def edit_teacher_view(request, pk: int):
         if form.is_valid():
             form.save()
             
-            return HttpResponseRedirect("/teachers/" + str(pk))
+            return HttpResponseRedirect(reverse("teacher:info", kwargs={"pk": pk}))
     
     context = {"form": form, "pk": pk}
-    return render(request, "teachers/edit_teacher.html", context=context)
+    return render(request, "teachers/edit.html", context=context)
 
 
 def delete_teacher_view(request, pk: int):
-    if request.method == "POST":
-        teacher = get_object_or_404(TeacherModel, pk=pk)
-        teacher.delete()
-        return HttpResponseRedirect("/teachers/")
+    teacher = get_object_or_404(TeacherModel, pk=pk)
     
-    return render(request, "teachers/delete_teacher.html", context={"pk": pk})
+    if request.method == "POST":
+        teacher.delete()
+        return HttpResponseRedirect(reverse("teacher:all"))
+    
+    return render(request, "teachers/delete.html", context={"teacher": teacher})

@@ -1,8 +1,5 @@
 from django.db import models
 
-from .validators import validate_unique_email
-
-
 DOMAINS = ["gmail.com", "yahoo.com", "icloud.com", "proton.me"]
 
 

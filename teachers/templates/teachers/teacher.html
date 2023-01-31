@@ -1,4 +1,4 @@
-{% extends "patterns/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -29,17 +29,18 @@
 
     <br>
 
-    <a href="{% url "edit_teacher" teacher.pk %}" style="text-decoration: none;">
+    <a href="{% url "teacher:edit" teacher.pk %}" style="text-decoration: none;">
         <input type="button" value="Edit">
     </a>
 
 
-    <a href="{% url "delete_teacher" teacher.pk %}" style="text-decoration: none;">
+    <a href="{% url "teacher:delete" teacher.pk %}" style="text-decoration: none;">
         <input type="button" value="Delete">
     </a>
 
-    <a href="{% url "teachers" %}" style="text-decoration: none;">
-        <input type="button" value="Back">
+    <br><br>
+    <a href="{% url "teacher:all" %}" style="text-decoration: none;">
+        <input type="button" value="All Teachers">
     </a>
 
 {% endblock %}
