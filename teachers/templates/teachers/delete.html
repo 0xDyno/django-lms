@@ -4,17 +4,23 @@
 
 {% block content %}
 
-    <p> Are you sure you want to delete "<strong>{{ teacher.name }} {{ teacher.surname }}</strong>"? </p>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <p>
+                    Are you sure you want to delete teacher "<strong>{{ teacher.name }} {{ teacher.surname }}</strong>"?
+                </p>
 
 
-
-    <form method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-
-        <a href="{% url "teacher:info" teacher.pk %}">
-            <input type="button" value="Teacher Details">
-        </a>
-    </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class="btn btn-outline-danger m-2">
+                    <a href="{% url "teacher:info" teacher.pk %}" class="btn btn-outline-primary m-2">Teacher Details</a>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
 
 {% endblock %}

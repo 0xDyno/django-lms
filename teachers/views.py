@@ -9,7 +9,7 @@ from .models import TeacherModel
 
 def all_teachers_view(request):
     context = {"all_teachers": TeacherModel.objects.all().order_by("-salary")}
-    return render(request, "teachers/teachers.html", context=context)
+    return render(request, "teachers/list.html", context=context)
 
 
 def teacher_view(request, pk: int):

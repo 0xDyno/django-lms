@@ -9,7 +9,7 @@ from .models import StudentModel
 
 def all_students_view(request):
     context = {"all_students": StudentModel.objects.all()}
-    return render(request, "students/students.html", context=context)
+    return render(request, "students/list.html", context=context)
 
 
 def student_view(request, pk: int):

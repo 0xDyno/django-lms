@@ -4,46 +4,44 @@
 
 {% block content %}
 
-    <h3>{{ group.name }}</h3>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <h3>{{ group.name }}</h3>
 
-    <table>
-        <tr>
-            <th>
-                {% if started %} Started on: {% else %} Starts on: {% endif %}
-            </th>
-            <td>
-                {{ group.start_date }}
-            </td>
-        </tr>
-
-
-        {% if group.description %}
-            <tr>
-                <th>
-                    Description:
-                </th>
-                <td>
-                    {{ group.description }}
-                </td>
-            </tr>
-        {% endif %}
-
-    </table>
-
-    <br>
-
-    <a href="{% url "group:edit" group.pk %}" style="text-decoration: none;">
-        <input type="button" value="Edit">
-    </a>
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            {% if started %} Started on: {% else %} Starts on: {% endif %}
+                        </th>
+                        <td>
+                            {{ group.start_date }}
+                        </td>
+                    </tr>
 
 
-    <a href="{% url "group:delete" group.pk %}" style="text-decoration: none;">
-        <input type="button" value="Delete">
-    </a>
+                    {% if group.description %}
+                        <tr>
+                            <th>
+                                Description:
+                            </th>
+                            <td>
+                                {{ group.description }}
+                            </td>
+                        </tr>
+                    {% endif %}
 
-    <br><br>
-    <a href="{% url "group:all" %}" style="text-decoration: none;">
-        <input type="button" value="All groups">
-    </a>
+                </table>
+
+
+                <a href="{% url "group:edit" group.pk %}" class="btn btn-outline-primary m-2">Edit</a>
+                <a href="{% url "group:delete" group.pk %}" class="btn btn-outline-danger m-2">Delete</a>
+                <br>
+                <a href="{% url "group:all" %}" class="btn btn-outline-primary m-2">All Groups</a>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
 
 {% endblock %}

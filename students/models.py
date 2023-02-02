@@ -1,3 +1,6 @@
+from datetime import date
+
+from dateutil.relativedelta import relativedelta
 from django.db import models
 
 DOMAINS = ["gmail.com", "yahoo.com", "icloud.com", "proton.me"]
@@ -17,6 +20,9 @@ class StudentModel(models.Model):
     
     def __str__(self):
         return "Student {} {} ({})".format(self.name, self.surname, self.id)
+    
+    def get_age(self):
+        return relativedelta(date.today(), self.birthday).years
     
     class Meta:
         db_table = "students"

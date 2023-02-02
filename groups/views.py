@@ -11,7 +11,7 @@ from .models import GroupModel
 def all_groups_view(request):
     groups = GroupModel.objects.all().order_by("-start_date")
     context = {"all_groups": groups}
-    return render(request, "groups/groups.html", context=context)
+    return render(request, "groups/list.html", context=context)
 
 
 def group_view(request, pk: int):

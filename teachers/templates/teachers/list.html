@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} - All Teachers {% endblock %}
+
+{% block content %}
+    <div class="raw">
+        {% if not all_teachers %}
+
+            <p>No teachers</p>
+
+        {% else %}
+
+            <table class="table table-striped table-hover text-center align-middle">
+                <tr>
+                    <th>#</th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Salary
+                    </th>
+                    <th>
+                        <i class="bi bi-pencil-fill"></i>
+                    </th>
+                    <th>
+                        <i class="bi bi-trash2"></i>
+                    </th>
+                </tr>
+
+                {% for teacher in all_teachers %}
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <a href="{% url "teacher:info" teacher.pk %}"> {{ teacher.name }} {{ teacher.surname }} </a>
+                        </td>
+
+                        <td>
+                            {{ teacher.salary }}
+                        </td>
+
+                        <td style="width: 100px;">
+                            <a href="{% url "teacher:edit" teacher.pk %}" class="btn btn-outline-primary m-2 btn-sm">
+                                Edit
+                            </a>
+                        </td>
+
+                        <td style="width: 100px;">
+                            <a href="{% url "teacher:delete" teacher.pk %}" class="btn btn-outline-danger m-2 btn-sm">
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+
+        {% endif %}
+    </div>
+{% endblock %}

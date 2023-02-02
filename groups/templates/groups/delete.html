@@ -4,15 +4,20 @@
 
 {% block content %}
 
-    <p> Are you sure you want to delete group "<strong>{{ group.name }}</strong>"? </p>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <p> Are you sure you want to delete group "<strong>{{ group.name }}</strong>"? </p>
 
-    <form method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-
-        <a href="{% url "group:info" group.pk %}">
-            <input type="button" value="Group Details">
-        </a>
-    </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class="btn btn-outline-danger m-2">
+                    <a href="{% url "group:info" group.pk %}" class="btn btn-outline-primary m-2">Group Details</a>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
 
 {% endblock %}
