@@ -11,7 +11,7 @@ from .models import GroupModel
 def all_groups_view(request):
     groups = GroupModel.objects.all().order_by("-start_date")
     context = {"all_groups": groups}
-    return render(request, "groups/groups.html", context=context)
+    return render(request, "groups/list.html", context=context)
 
 
 def group_view(request, pk: int):
@@ -32,7 +32,7 @@ def create_group_view(request):
         
         if form.is_valid():
             group = form.save()
-            return HttpResponseRedirect("/groups/" + str(group.pk))
+            return HttpResponseRedirect(reverse("group:info", kwargs={"pk": group.pk}))
     
     context = {"form": form}
     return render(request, "groups/create.html", context=context)

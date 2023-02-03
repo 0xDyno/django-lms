@@ -4,17 +4,35 @@
 
 {% block content %}
 
-    <form method="post">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col">
+                <form method="post" class="form-floating">
+                    {% csrf_token %}
 
-        <br>
+                    <div class="form-floating m-1">
+                        <input type="text" class="form-control" id="floatingName" name="{{ form.name.name }}"
+                               value="{{ form.name.value }}" placeholder="Name">
+                        <label for="floatingName">Name</label>
+                    </div>
+                    <div class="form-floating m-1">
+                        <input type="text" class="form-control" id="floatingSurname" name="{{ form.surname.name }}"
+                               value="{{ form.surname.value }}" placeholder="Surname">
+                        <label for="floatingSurname">Surname</label>
+                    </div>
+                    <div class="form-floating m-1">
+                        <input type="date" class="form-control" id="floatingBirthday" name="{{ form.birthday.name }}"
+                               value="{{ form.birthday.value|date:"Y-m-d" }}" placeholder="Birthday">
+                        <label for="floatingBirthday">Birthday</label>
+                    </div>
 
-        <input type="submit" value="Save">
-
-        <a href="{% url "teacher:info" pk %}"><input type="button" value="Teacher Details"></a>
-    </form>
+                    <input type="submit" class="btn btn-outline-success m-2" value="Save">
+                    <a href="{% url "teacher:info" pk %}" class="btn btn-outline-primary m-2">Teacher Details</a>
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
 
 {% endblock %}

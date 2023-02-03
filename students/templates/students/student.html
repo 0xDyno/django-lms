@@ -1,70 +1,71 @@
 {% extends "base.html" %}
 
+{% block title %} - Student Info {{ student.name }} {{ student.surname }} {% endblock %}
+
 {% block content %}
 
-    <h3>{{ student.name }} {{ student.surname }}</h3>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <h3>{{ student.name }} {{ student.surname }}</h3>
 
-    <table>
-        <tr>
-            <th>
-                Email:
-            </th>
-            <td>
-                {{ student.email }}
-            </td>
-        </tr>
-
-
-        {% if student.birthday %}
-            <tr>
-                <th>
-                    Birthday:
-                </th>
-                <td>
-                    {{ student.birthday }}
-                </td>
-            </tr>
-        {% endif %}
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            Email:
+                        </th>
+                        <td>
+                            {{ student.email }}
+                        </td>
+                    </tr>
 
 
-        {% if student.city %}
-            <tr>
-                <th>
-                    City:
-                </th>
-                <td>
-                    {{ student.city }}
-                </td>
-            </tr>
-        {% endif %}
+                    {% if student.birthday %}
+                        <tr>
+                            <th>
+                                Birthday:
+                            </th>
+                            <td>
+                                {{ student.birthday }}
+                            </td>
+                        </tr>
+                    {% endif %}
 
 
-        {% if student.phone_number %}
-            <tr>
-                <th>
-                    Phone:
-                </th>
-                <td>
-                    {{ student.phone_number }}
-                </td>
-            </tr>
-        {% endif %}
-    </table>
-
-    <br>
-
-    <a href="{% url "student:edit" student.pk %}" style="text-decoration: none;">
-        <input type="button" value="Edit">
-    </a>
+                    {% if student.city %}
+                        <tr>
+                            <th>
+                                City:
+                            </th>
+                            <td>
+                                {{ student.city }}
+                            </td>
+                        </tr>
+                    {% endif %}
 
 
-    <a href="{% url "student:delete" student.pk %}" style="text-decoration: none;">
-        <input type="button" value="Delete">
-    </a>
+                    {% if student.phone_number %}
+                        <tr>
+                            <th>
+                                Phone:
+                            </th>
+                            <td>
+                                {{ student.phone_number }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
 
-    <br><br>
-    <a href="{% url "student:all" %}" style="text-decoration: none;">
-        <input type="button" value="All Students">
-    </a>
+                <br>
+
+                <a href="{% url "student:edit" student.pk %}" class="btn btn-outline-primary m-2">Edit</a>
+                <a href="{% url "student:delete" student.pk %}" class="btn btn-outline-danger m-2">Delete</a>
+                <br>
+                <a href="{% url "student:all" %}" class="btn btn-outline-primary m-2">All Students</a>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
 
 {% endblock %}

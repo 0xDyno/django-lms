@@ -3,15 +3,26 @@
 {% block title %} - Edit Group {{ group.name }} {% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        <label for="description">Description</label> <br> <br>
-        {{ form.description }}
 
-        <br><br>
-        <input type="submit" value="Save">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
 
-        <a href="{% url "group:info" group.pk %}"><input type="button" value="Group Details"></a>
-    </form>
+                    <div class="form-floating m-1">
+                        <textarea class="form-control" placeholder="s" id="floatingTextarea"
+                                  name="{{ form.description.name }}">{{ form.description.value }}</textarea>
+                        <label for="floatingTextarea">Description</label>
+                    </div>
+
+                    <input type="submit" class="btn btn-outline-success m-2" value="Save">
+                    <a href="{% url "group:info" group.pk %}" class="btn btn-outline-primary m-2">Group Details</a>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
 
 {% endblock %}

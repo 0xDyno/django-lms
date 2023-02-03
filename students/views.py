@@ -9,7 +9,7 @@ from .models import StudentModel
 
 def all_students_view(request):
     context = {"all_students": StudentModel.objects.all()}
-    return render(request, "students/students.html", context=context)
+    return render(request, "students/list.html", context=context)
 
 
 def student_view(request, pk: int):
@@ -28,7 +28,7 @@ def create_student_view(request):
         
         if form.is_valid():
             student = form.save()
-            return HttpResponseRedirect("/students/" + str(student.pk))
+            return HttpResponseRedirect(reverse("student:info", kwargs={"pk": student.pk}))
     
     context = {"form": form}
     return render(request, "students/create.html", context=context)
