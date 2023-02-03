@@ -28,7 +28,7 @@ def create_student_view(request):
         
         if form.is_valid():
             student = form.save()
-            return HttpResponseRedirect("/students/" + str(student.pk))
+            return HttpResponseRedirect(reverse("student:info", kwargs={"pk": student.pk}))
     
     context = {"form": form}
     return render(request, "students/create.html", context=context)

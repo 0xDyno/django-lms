@@ -32,7 +32,7 @@ def create_group_view(request):
         
         if form.is_valid():
             group = form.save()
-            return HttpResponseRedirect("/groups/" + str(group.pk))
+            return HttpResponseRedirect(reverse("group:info", kwargs={"pk": group.pk}))
     
     context = {"form": form}
     return render(request, "groups/create.html", context=context)
