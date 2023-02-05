@@ -6,3 +6,4 @@ flake8-import-order==0.18.2			# add to flake8
 pep8-naming==0.13.3
 python-dotenv==0.21.0
 faker==16.6.0
+django-crispy-forms==1.14.0
